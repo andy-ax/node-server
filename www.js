@@ -2,6 +2,7 @@ var http = require("http");
 var serverHelper = require("./bin/helper/server");
 var handle404 = require('./bin/helper/handel404').handle404;
 var route = require('./bin/helper/route');
+var parse = require('./bin/helper/parse').parse;
 
 var cache = {};
 var process = 23000;
@@ -9,8 +10,10 @@ var onRequest = function(request, response) {
     if (request.url === '/') {
         serverHelper.serverStatic(response, cache, './public/index.html');
     } else {
+        //路径解析
+        var urlObj = parse(request.url);
         //路由映射
-        var result = route.pathSet(request,response);
+        var result = route.pathSet(request, urlObj.pathname);
         if (result) {
             result.action.apply(this, result.args);
         } else {
