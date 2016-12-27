@@ -5,7 +5,7 @@
 涉及到的模块有
 
 
-  	1 数据库 mongodb redis -> 已完成
+  	1 数据库 mongodb redis
   
   
   	2 buffer stream pipe fs -> 已完成
